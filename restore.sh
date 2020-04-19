@@ -44,6 +44,12 @@ echo "creating user dirs"
 
 xdg-user-dirs-update
 
+echo "removing packages that may cause issues"
+
+sed -i '/edopro-bin/d' .config/pkgbackup/pkglist-aur.txt 
+
+sed -i '/packettracer/d' .config/pkgbackup/pkglist-aur.txt
+
 echo "installing yay"
 
 git clone https://aur.archlinux.org/yay.git ~/yay 
