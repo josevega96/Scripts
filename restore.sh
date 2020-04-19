@@ -146,6 +146,8 @@ sudo systemctl enable libvirt.service
 
 sudo systemctl start reflector.timer
 
+sudo systemctl enable mpd.service
+
 sudo sed -i 's|Defaults        timestamp_timeout=-1| |g' /etc/sudoers
 
 echo "finished installing rebooting"
