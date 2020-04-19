@@ -134,6 +134,20 @@ case "$2" in
     ;;
 esac' | sudo tee /etc/NetworkManager/dispatcher.d/09-timezone
 
+echo "Removing extra software"
+
+sudo rm -rf /sbin/blocks
+
+sudo rm -rf /sbin/fluid
+
+sudo rm -rf /sbin/sudoku
+
+sudo rm -rf /sbin/checkers
+
+sudo rm -rf /sbin/lstopo
+
+sudo rm -rf /sbin/checkers
+
 echo "ading user $USER to the video group"
 
 sudo usermod -a -G video $USER
