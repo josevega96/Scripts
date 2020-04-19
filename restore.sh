@@ -168,7 +168,7 @@ sudo systemctl start reflector.timer
 
 sudo systemctl enable mpd.service
 
-sudo sed -i 's|Defaults        timestamp_timeout=-1| |g' /etc/sudoers
+sudo sed -i '/Defaults        timestamp_timeout=-1/d' /etc/sudoers
 
 echo "finished installing rebooting"
 
