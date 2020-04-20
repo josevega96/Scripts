@@ -15,10 +15,9 @@ echo "Setting up bare git repo"
 
  echo "found .bashrc writing bareconf alias"
  echo "# bare alias" >> .bashrc
-  echo "alias bareconf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> .bashrc
-         source ~/.bashrc
-
-bareconf checkout
+ echo "alias bareconf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> .bashrc
+ 
+ /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
 
 echo "you can now access your home repository using \"bareconf\""
 
@@ -28,7 +27,9 @@ sudo sh -c "echo 'Defaults        timestamp_timeout=-1' >> /etc/sudoers"
 
 echo "enabling multilib repos"
 
-sudo awk '$0=="#[multilib]"{c=2} c&&c--{sub(/#/,"")} 1' /etc/pacman.conf
+sed -i 's/#\[multilib]/\[multilib]/g' /etc/pacman.conf
+
+sudo sed -i '93s|#Include = /etc/pacman.d/mirrorlist|Include = /etc/pacman.d/mirrorlist|g'  /etc/pacman.conf
 
 echo "updating pacman database" 
 
