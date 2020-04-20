@@ -28,9 +28,7 @@ sudo sh -c "echo 'Defaults        timestamp_timeout=-1' >> /etc/sudoers"
 
 echo "enabling multilib repos"
 
-sudo sed -i 's|#[multilib]|[multilib]|g' /etc/pacman.conf
-
-sudo sed -i '93s|#Include = /etc/pacman.d/mirrorlist|Include = /etc/pacman.d/mirrorlist|g'  /etc/pacman.conf
+sudo awk '$0=="#[multilib]"{c=2} c&&c--{sub(/#/,"")} 1' /etc/pacman.conf
 
 echo "updating pacman database" 
 
