@@ -139,7 +139,13 @@ case "$2" in
     up)
         timedatectl set-timezone "$(curl --fail https://ipapi.co/timezone)"
     ;;
-esac' | sudo tee /etc/NetworkManager/dispatcher.d/09-timezone
+esac' | sudo tee /etc/NetworkManager/dispatcher.d/09-timezone.sh
+
+sudo chown root:root /etc/NetworkManager/dispatcher.d/09-timezone.sh
+
+sudo chmod 755 /etc/NetworkManager/dispatcher.d/09-timezone.sh
+
+
 
 echo "Removing extra software"
 
