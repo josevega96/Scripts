@@ -59,7 +59,7 @@ makepkg -si
 
 cd 
 
-rm yay
+rm -rf yay
 
 echo "installing all packages from the AUR"
 
