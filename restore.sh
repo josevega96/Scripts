@@ -171,7 +171,7 @@ sudo systemctl enable ly.service
 
 sudo systemctl enable libvirt.service 
 
-sudo systemctl start reflector.timer
+sudo systemctl enable reflector.timer
 
 sudo systemctl enable mpd.service
 
