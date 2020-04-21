@@ -14,10 +14,14 @@ git clone --bare -b Linux-i3 https://github.com/josevega96/dotfiles $HOME/.cfg
 echo "Setting up bare git repo"
 
  echo "found .bashrc writing bareconf alias"
+
  echo "# bare alias" >> .bashrc
+
  echo "alias bareconf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> .bashrc
- 
+
  /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
+
+ /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 echo "you can now access your home repository using \"bareconf\""
 
