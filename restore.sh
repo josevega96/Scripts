@@ -67,6 +67,8 @@ yay -S --needed  - < /home/$USER/.config/pkgbackup/pkglist-aur.txt
 
 echo "creating pacman hook for pkgbackup"
 
+sudo mkdir -p /etc/pacman.d/hooks
+
 echo "[Trigger]
  Operation = Install 
 Operation = Remove 
