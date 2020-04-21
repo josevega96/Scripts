@@ -163,7 +163,6 @@ sudo rm -rf /sbin/checkers
 
 sudo rm -rf /sbin/lstopo
 
-sudo rm -rf /sbin/checkers
 
 echo "ading user $USER to the video group"
 
