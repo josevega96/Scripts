@@ -151,6 +151,26 @@ echo"copyinng polybar fonts"
 
 sudo cp -r ~/.config/polybar/fonts/* /usr/share/fonts/
 
+
+echo  "Install oh-my-zsh and set zsh as the default shell? (y/n) "
+
+echo
+
+read reply
+
+echo 
+
+if [[ $reply =~ ^[Yy]$ ]]
+then
+    echo "installing oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME restore ~/.zshrc
+    sudo usermod --shell $(which zsh) $USER
+    
+fi
+
 echo "Removing extra software"
 
 sudo rm -rf /sbin/blocks
