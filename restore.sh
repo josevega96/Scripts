@@ -149,7 +149,9 @@ sudo chown root:root /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
 sudo chmod 755 /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
+echo"copyinng polybar fonts"
 
+sudo cp ~/home/.config/polybar/fonts/* /usr/share/fonts/
 
 echo "Removing extra software"
 
