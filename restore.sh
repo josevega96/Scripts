@@ -96,8 +96,6 @@ Exec = /bin/sh -c '/usr/bin/pacman -Qqem > /home/$USER/.config/pkgbackup/pkglist
 
 echo "setting up reflector" 
 
-sudo touch /etc/systemd/system/reflector.service
-
 sudo sh -c "echo '[Unit] 
 Description=Pacman mirrorlist update 
 Wants=network-online.target 
@@ -132,7 +130,7 @@ Identifier \"system-keyboard\"
 MatchIsKeyboard \"on\" 
 Option \"XkbLayout\" \"$kb_lay\" 
 Option \"XkbModel\" \"pc104\" 
-Option \"XkbVariant\" \"qwerty\" 
+Option \"XkbVariant\" \",qwerty\" 
 Option \"XkbOptions\" \"grp:alt_shift_toggle\" 
 EndSection " | sudo tee  /etc/X11/xorg.conf.d/00-keyboard.conf
 
@@ -151,7 +149,7 @@ sudo chmod 755 /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
 echo"copyinng polybar fonts"
 
-sudo cp ~/home/.config/polybar/fonts/* /usr/share/fonts/
+sudo cp -r ~/.config/polybar/fonts/* /usr/share/fonts/
 
 echo "Removing extra software"
 
