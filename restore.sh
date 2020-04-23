@@ -25,7 +25,7 @@ echo "Setting up bare git repo"
 
 echo "you can now access your home repository using \"bareconf\""
 
-echo "requesting sudo access you only need to type tour password once"
+echo "requesting sudo access you only need to type your password once"
 
 sudo sh -c "echo 'Defaults        timestamp_timeout=-1' >> /etc/sudoers"
 
@@ -107,8 +107,6 @@ Type=oneshot ExecStart=/usr/bin/reflector --protocol https --latest 30 --number 
 [Install] 
 RequiredBy=multi-user.target' >> /etc/systemd/system/reflector.service"
 
-touch /etc/systemd/system/reflector.timer
-
 sudo sh -c "echo '[Unit] 
 Description=Run reflector weekly 
 
@@ -147,7 +145,7 @@ sudo chown root:root /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
 sudo chmod 755 /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
-echo"copyinng polybar fonts"
+echo "copyinng polybar fonts"
 
 sudo cp -r ~/.config/polybar/fonts/* /usr/share/fonts/
 
