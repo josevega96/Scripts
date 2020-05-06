@@ -118,6 +118,11 @@ Persistent=true
 [Install] 
 WantedBy=timers.target' >>  /etc/systemd/system/reflector.timer"
 
+echo'# UDISKS_FILESYSTEM_SHARED
+# ==1: mount filesystem to a shared directory (/media/VolumeName)
+# ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
+# See udisks(8)
+ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"'| sudo tee /etc/udev/rules.d/99-udisks2.rules 
 
 echo "preparing to setup keyboad for x please type your keyboard layout"
 
