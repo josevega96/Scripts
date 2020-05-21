@@ -118,6 +118,17 @@ Persistent=true
 [Install] 
 WantedBy=timers.target' >>  /etc/systemd/system/reflector.timer"
 
+echo "/* Allow members of the wheel group to execute the defined actions 
+ * without password authentication, similar to "sudo NOPASSWD:"
+ */
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.libvirt.unix.manage") &&
+        subject.isInGroup("wheel"))
+    {
+        return polkit.Result.YES;
+    }
+});"| sudo tee /etc/polkit-1/rules.d/49-nopasswd_limited.rules
+
 echo'# UDISKS_FILESYSTEM_SHARED
 # ==1: mount filesystem to a shared directory (/media/VolumeName)
 # ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
@@ -189,7 +200,7 @@ sudo rm -rf /sbin/lstopo
 
 echo "ading user $USER to the video group"
 
-sudo usermod -a -G video $USER
+sudo usermod -a -G video,wheel $USER
 
 echo "enabling all necessary systemd services"
 
