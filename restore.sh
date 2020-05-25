@@ -9,19 +9,19 @@ touch .gitignore
 
 echo ".cfg" >> .gitignore
 
-git clone --bare -b Linux-i3 https://github.com/josevega96/dotfiles $HOME/.cfg
+git clone --bare -b Linux-qtile https://github.com/josevega96/dotfiles $HOME/.cfg
 
-echo "Setting up bare git repo"
+echo "Setting up bare git repo" 
 
- echo "found .bashrc writing bareconf alias"
+echo "found .bashrc writing bareconf alias"
 
- echo "# bare alias" >> .bashrc
+echo "# bare alias" >> .bashrc
 
- echo "alias bareconf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> .bashrc
+echo "alias bareconf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> .bashrc
 
- /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
+/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
 
- /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedFiles no
+/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 echo "you can now access your home repository using \"bareconf\""
 
@@ -50,8 +50,6 @@ xdg-user-dirs-update
 echo "removing packages that may cause issues"
 
 sed -i '/edopro-bin/d' .config/pkgbackup/pkglist-aur.txt 
-
-sed -i '/packettracer/d' .config/pkgbackup/pkglist-aur.txt
 
 echo "installing yay"
 
@@ -118,7 +116,7 @@ Persistent=true
 [Install] 
 WantedBy=timers.target' >>  /etc/systemd/system/reflector.timer"
 
-echo "/* Allow members of the wheel group to execute the defined actions 
+echo '/* Allow members of the wheel group to execute the defined actions 
  * without password authentication, similar to "sudo NOPASSWD:"
  */
 polkit.addRule(function(action, subject) {
@@ -127,7 +125,7 @@ polkit.addRule(function(action, subject) {
     {
         return polkit.Result.YES;
     }
-});"| sudo tee /etc/polkit-1/rules.d/49-nopasswd_limited.rules
+});'| sudo tee /etc/polkit-1/rules.d/49-nopasswd_limited.rules
 
 echo'# UDISKS_FILESYSTEM_SHARED
 # ==1: mount filesystem to a shared directory (/media/VolumeName)
@@ -160,11 +158,6 @@ esac' | sudo tee /etc/NetworkManager/dispatcher.d/09-timezone.sh
 sudo chown root:root /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
 sudo chmod 755 /etc/NetworkManager/dispatcher.d/09-timezone.sh
-
-echo "copyinng polybar fonts"
-
-sudo cp -r ~/.config/polybar/fonts/* /usr/share/fonts/
-
 
 echo  "Install oh-my-zsh and set zsh as the default shell? (y/n) "
 
