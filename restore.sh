@@ -47,6 +47,8 @@ echo "creating user dirs"
 
 xdg-user-dirs-update
 
+mkdir -p ~/.vim/undodir 
+
 echo "removing packages that may cause issues"
 
 sed -i '/edopro-bin/d' .config/pkgbackup/pkglist-aur.txt 
