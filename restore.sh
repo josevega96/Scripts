@@ -41,7 +41,7 @@ sudo pacman -Sy
 
 echo "installing all packages found in .config/pkgbabackup/pkglist.txt"
 
-sudo pacman -S --needed - < /home/$USER/.config/pkgbackup/pkglist.txt
+sudo pacman -S --needed --noconfirm - < /home/$USER/.config/pkgbackup/pkglist.txt
 
 echo "creating user dirs"
 
@@ -59,7 +59,7 @@ git clone https://aur.archlinux.org/yay.git ~/yay
 
 cd ~/yay 
 
-makepkg -si
+makepkg -si --noconfirm 
 
 cd 
 
@@ -67,7 +67,7 @@ rm -rf yay
 
 echo "installing all packages from the AUR"
 
-yay -S --needed  - < /home/$USER/.config/pkgbackup/pkglist-aur.txt
+yay -S --needed --noconfirm - < /home/$USER/.config/pkgbackup/pkglist-aur.txt
 
 echo "creating pacman hook for pkgbackup"
 

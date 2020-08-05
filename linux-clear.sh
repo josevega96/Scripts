@@ -22,7 +22,7 @@ sed -i "s|_subarch=33|_subarch=$sel|g" PKGBUILD
 
 echo 'building kernel'
 
-makepkg -sir
+makepkg -sir --noconfirm
 
 echo 'installation finished, deleting build directory and reenabling sudo timeout'
 
