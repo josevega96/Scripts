@@ -21,32 +21,44 @@ echo "$ver version found "
 
 echo "looking if clang toolchain exists"
 
-if [ -d $HOME/android/toolchains/clang ];
+if [ -d $HOME/Android/toolchains/clang ];
 then
-    echo "clang found pulling lastest version"
-    cd $HOME/android/toolchains/clang 
-    git pull
-else 
-    echo "clang directory not found, cloning lastest version from google"
-    git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/ $HOME/android/toolchains/clang 
+    echo "Clang directory found continuing"
+else
+    echo "clang directory not found fetching version for android 10"
+    mkdir $HOME/Android/toolchains/clang
+    cd $HOME/Android/toolchains/clang 
+    wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/android-10.0.0_r3/clang-r353983c.tar.gz
+    tar -xvzf clang-r353983c.tar.gz 
+    rm clang-r353983c.tar.gz 
+
 fi 
 
-echo "looking if gcc toolchain exists"
+echo "looking if arm64 gcc toolchain exists"
 
-if [ -d $HOME/android/toolchains/gcc-linux-arm64-4.9 ];
+if [ -d $HOME/Android/toolchains/gcc-linux-arm64-4.9 ];
 then
     echo "gcc found pulling lastest version"
-    cd $HOME/android/toolchains/gcc-linux-arm64-4.9
+    cd $HOME/Android/toolchains/gcc-linux-arm64-4.9
     git pull
-    cd $HOME/android/toolchains/gcc-linux-arm-4.9
-    git pull
-    cd $1 
 else 
     echo "gcc directory not found, cloning lastest arm64 version from google"
-    git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/ $HOME/android/toolchains/gcc-linux-arm64-4.9
-    echo "cloning lastest armeabi version from google"
-    git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/  $HOME/android/toolchains/gcc-linux-arm-4.9 
+    git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/ $HOME/Android/toolchains/gcc-linux-arm64-4.9
 fi 
+
+echo "looking if arm gcc toolchain exists"
+
+if [ -d $HOME/Android/toolchains/gcc-linux-arm-4.9 ];
+then
+    echo "gcc found pulling lastest version"
+    cd $HOME/Android/toolchains/gcc-linux-arm-4.9
+    git pull 
+else 
+    echo "cloning lastest armeabi version from google"
+    git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/  $HOME/Android/toolchains/gcc-linux-arm-4.9 
+fi
+
+cd $1 
 
 echo "creating output directory"
 
@@ -58,7 +70,7 @@ read defconfig
 
 make O=out ARCH=arm64 $defconfig
 
-PATH="$HOME/android/toolchains/clang/bin:$HOME/android/toolchains/gcc-linux-arm64-4.9/bin:$HOME/android/toolchains/gcc-linux-arm-4.9/bin:${PATH}" \
+PATH="$HOME/Android/toolchains/clang/bin:$HOME/Android/toolchains/gcc-linux-arm64-4.9/bin:$HOME/Android/toolchains/gcc-linux-arm-4.9/bin:${PATH}" \
 make -j$(nproc --all) O=out \
                       ARCH=arm64 \
                       CC=clang \
@@ -70,11 +82,11 @@ notify-send 'kernbuild' 'kernel compilation finished'
 
 echo "creating zip with anykernel and deleting build directory"
 
-cp $1/out/arch/arm64/boot/Image.gz-dtb $HOME/android/tools/anykernel/
+cp $1/out/arch/arm64/boot/Image.gz-dtb $HOME/Android/tools/anykernel/
 
 rm -rf out
 
-cd $HOME/android/tools/anykernel/
+cd $HOME/Android/tools/anykernel/
 
 zip -r9 kernel.zip * -x .git README.md 
 
