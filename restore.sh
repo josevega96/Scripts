@@ -96,27 +96,9 @@ Exec = /bin/sh -c '/usr/bin/pacman -Qqem > /home/$USER/.config/pkgbackup/pkglist
 
 echo "setting up reflector" 
 
-sudo sh -c "echo '[Unit] 
-Description=Pacman mirrorlist update 
-Wants=network-online.target 
-After=network-online.target 
+sudo sed -i 's|age|rate|g' /etc/xdg/reflector/reflector.conf 
 
-[Service] 
-Type=oneshot ExecStart=/usr/bin/reflector --protocol https --latest 30 --number 20 --sort rate --save /etc/pacman.d/mirrorlist
-
-[Install] 
-RequiredBy=multi-user.target' >> /etc/systemd/system/reflector.service"
-
-sudo sh -c "echo '[Unit] 
-Description=Run reflector weekly 
-
-[Timer] 
-OnCalendar=Mon *-*-* 7:00:00 
-RandomizedDelaySec=15h 
-Persistent=true 
-
-[Install] 
-WantedBy=timers.target' >>  /etc/systemd/system/reflector.timer"
+sudo sed -i 's|5|20|g' /etc/xdg/reflector/reflector.conf
 
 echo '/* Allow members of the wheel group to execute the defined actions 
  * without password authentication, similar to "sudo NOPASSWD:"
