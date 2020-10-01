@@ -65,6 +65,16 @@ cd
 
 rm -rf yay
 
+echo "importing gpg keys manually"
+
+gpg --keyserver pool.sks-keyservers.net --recv-keys FCF986EA15E6E293A5644F10B4322F04D67658D8
+
+gpg --keyserver keys.gnupg.net --recv-keys C52048C0C0748FEE227D47A2702353E0F7E48EDB
+
+gpg --keyserver hkp://keyserver.ubuntu.com --receive-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+
+gpg --keyserver hkp://keyserver.ubuntu.com --receive-keys 2EBF997C15BDA244B6EBF5D84773BD5E130D1D45
+
 echo "installing all packages from the AUR"
 
 yay -S --needed --noconfirm - < /home/$USER/.config/pkgbackup/pkglist-aur.txt
