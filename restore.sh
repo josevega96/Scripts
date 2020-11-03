@@ -71,9 +71,13 @@ gpg --keyserver pool.sks-keyservers.net --recv-keys FCF986EA15E6E293A5644F10B432
 
 gpg --keyserver keys.gnupg.net --recv-keys C52048C0C0748FEE227D47A2702353E0F7E48EDB
 
+#spotify
+
 gpg --keyserver hkp://keyserver.ubuntu.com --receive-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
 
 gpg --keyserver hkp://keyserver.ubuntu.com --receive-keys 2EBF997C15BDA244B6EBF5D84773BD5E130D1D45
+
+curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | gpg --import -
 
 echo "installing all packages from the AUR"
 
