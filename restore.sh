@@ -125,7 +125,9 @@ polkit.addRule(function(action, subject) {
     }
 });'| sudo tee /etc/polkit-1/rules.d/49-nopasswd_limited.rules
 
-echo'# UDISKS_FILESYSTEM_SHARED
+sudo mkdir /media
+
+echo '# UDISKS_FILESYSTEM_SHARED
 # ==1: mount filesystem to a shared directory (/media/VolumeName)
 # ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
 # See udisks(8)
