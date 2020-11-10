@@ -209,7 +209,7 @@ echo "enabling all necessary systemd services"
 
 sudo systemctl enable ly.service 
 
-sudo systemctl enable libvirt.service 
+sudo systemctl enable libvirtd.service 
 
 sudo systemctl enable reflector.timer
 
