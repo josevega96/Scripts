@@ -6,6 +6,11 @@ echo 'disabling sudo timeout'
 
 sudo sh -c "echo 'Defaults        timestamp_timeout=-1' >> /etc/sudoers"
 
+echo 'importing lastest gpg keys'
+
+gpg --locate-keys torvalds@kernel.org gregkh@kernel.org
+
+
 echo 'Fetching lastest linux-clear release from the aur' 
 
 git clone https://aur.archlinux.org/linux-clear.git linux-clear
