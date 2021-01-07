@@ -26,7 +26,7 @@ then
     echo "Clang directory found continuing"
 else
     echo "clang directory not found fetching version for android 10"
-    mkdir $HOME/Android/toolchains/clang
+    mkdir -p $HOME/Android/toolchains/clang
     cd $HOME/Android/toolchains/clang 
     wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/android-10.0.0_r3/clang-r353983c.tar.gz
     tar -xvzf clang-r353983c.tar.gz 
