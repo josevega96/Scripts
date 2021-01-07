@@ -71,8 +71,11 @@ echo 'to which kernel do you want to change'
 count2=0
 
 while [ $count2 -lt $count ]; do
-	echo -e "$count2 \c"
-	echo ${kernels[$count2]}
+    if [[ -n ${kernels[$count2]} ]];
+    then
+	    echo -e "$count2 \c"
+	    echo ${kernels[$count2]}
+    fi
 	let count2=count2+1
 done
 
