@@ -114,6 +114,31 @@ sudo sed -i 's|age|rate|g' /etc/xdg/reflector/reflector.conf
 
 sudo sed -i 's|5|20|g' /etc/xdg/reflector/reflector.conf
 
+echo 'configuring btrfs-snapshot'
+
+sudo mkdir -p /.snapshots/{root,home}
+
+echo "[Trigger]
+Operation = Install 
+Operation = Upgrade
+Operation = Remove 
+Type = Package 
+Target = *
+
+[Action] 
+When = PreTransaction 
+Exec = /bin/sh -c '/sbin/btrfs-snapshot -f -c /etc/btrfs-snapshot/root.conf'" | sudo tee /etc/pacman.d/hooks/btrfs-snapshot.hook
+
+echo '# vim: set ft=sh:
+SUBVOL=/
+DEST=/.snapshots/root
+NKEEP=5' | sudo tee /etc/btrfs-snapshot/root.conf
+
+echo '# vim: set ft=sh:
+SUBVOL=/home
+DEST=/.snapshots/home
+NKEEP=5' | sudo tee /etc/btrfs-snapshot/home.conf
+
 echo '/* Allow members of the wheel group to execute the defined actions 
  * without password authentication, similar to "sudo NOPASSWD:"
  */
