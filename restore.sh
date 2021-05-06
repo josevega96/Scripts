@@ -160,13 +160,15 @@ ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"'|
 
 echo "preparing to setup bluetooth"
 
-sudo sed -i 's|#AutoEnable=false|AutoEnable=true|g'  /etc/bluetooth/main.conf
-
 sudo sed -i "s|#DiscoverableTimeout\s=\s0|DiscoverableTimeout\ =\ 0\nDiscoverable\ =\ 0\n|g"  /etc/bluetooth/main.conf
 
 sudo sed -i "\$a###Load\ Bluetooth\ Modules###\nload-module module-bluetooth-policy\nload-module module-bluetooth-discover" /etc/pulse/system.pa
 
 sudo sed -i "\$a#automatically\ switch\ to\ newly-conected\ devices\nload-module module-switch-on-connect" /etc/pulse/default.pa
+
+sudo sed -i "s|#bluez5.msbc-support|bluez5.msbc-support|g" /etc/pipewire/media-session.d/bluez-monitor.conf
+
+
 
 echo "preparing to setup keyboad for x please type your keyboard layout"
 
