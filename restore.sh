@@ -166,9 +166,7 @@ sudo sed -i "\$a###Load\ Bluetooth\ Modules###\nload-module module-bluetooth-pol
 
 sudo sed -i "\$a#automatically\ switch\ to\ newly-conected\ devices\nload-module module-switch-on-connect" /etc/pulse/default.pa
 
-sudo sed -i "s|#bluez5.msbc-support|bluez5.msbc-support|g" /etc/pipewire/media-session.d/bluez-monitor.conf
-
-
+sudo sed -i "s|#bluez5.msbc-support.*|bluez5.msbc-support \=\ true|" /etc/pipewire/media-session.d/bluez-monitor.conf
 
 echo "preparing to setup keyboad for x please type your keyboard layout"
 
