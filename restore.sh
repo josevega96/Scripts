@@ -29,11 +29,15 @@ echo "requesting sudo access you only need to type your password once"
 
 sudo sh -c "echo 'Defaults        timestamp_timeout=-1' >> /etc/sudoers"
 
+echo "Enabling Parallel Downloads"
+
+sudo sed -i "s/#Parallel/Parallel/g" /etc/pacman.conf
+
 echo "enabling multilib repos"
 
 sudo sed -i 's/#\[multilib]/\[multilib]/g' /etc/pacman.conf
 
-sudo sed -i '93s|#Include = /etc/pacman.d/mirrorlist|Include = /etc/pacman.d/mirrorlist|g'  /etc/pacman.conf
+sudo sed -i '94s|#Include = /etc/pacman.d/mirrorlist|Include = /etc/pacman.d/mirrorlist|g'  /etc/pacman.conf
 
 echo "updating pacman database" 
 
