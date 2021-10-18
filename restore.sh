@@ -1,6 +1,13 @@
 #!/bin/bash
 ## Restore script for my i3 configuration
 
+
+echo "Installing initial dependencies"
+
+sudo pacman -S git iptables-nft
+
+sudo pacman -R vim
+
 echo "cloning backup repo"
 
 cd ~
@@ -54,8 +61,9 @@ xdg-user-dirs-update
 mkdir -p ~/.vim/undodir 
 
 echo "removing packages that may cause issues"
+#add packages you do not want to install here
+# sed -i '/linux-lts/d' .config/pkgbackup/pkglist-aur.txt 
 
-sed -i '/edopro-bin/d' .config/pkgbackup/pkglist-aur.txt 
 
 echo "installing yay"
 
@@ -198,7 +206,7 @@ sudo chown root:root /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
 echo "Configuring lightdm"
 
-sudo sed -i "s|# greeter-session.*|greeter-session=lightdm-webkit2-greeter|g" lightdm.conf
+sudo sed -i "s|#greeter-session=example-gtk-gnome|greeter-session=lightdm-webkit2-greeter|g" /etc/lightdm/lightdm.conf
 
 sudo sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = glorious #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf
 
