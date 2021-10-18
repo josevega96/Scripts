@@ -196,6 +196,16 @@ esac' | sudo tee /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
 sudo chown root:root /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
+echo "Configuring lightdm"
+
+sudo sed -i "s|# greeter-session.*|greeter-session=lightdm-webkit2-greeter|g" lightdm.conf
+
+sudo sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = glorious #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf
+
+sudo sed -i 's/^debug_mode\s*=\s*\(.*\)/debug_mode = true #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf 
+
+sudo chown $USER:$USER /usr/share/backgrounds 
+
 sudo chmod 755 /etc/NetworkManager/dispatcher.d/09-timezone.sh
 
 echo  "Install oh-my-zsh and set zsh as the default shell? (y/n) "
@@ -236,7 +246,7 @@ sudo usermod -a -G video,wheel $USER
 
 echo "enabling all necessary systemd services"
 
-sudo systemctl enable ly.service 
+sudo systemctl enable lightdm.service 
 
 sudo systemctl enable libvirtd.service 
 
